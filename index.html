@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notion Pomodoro Timer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gradient" id="body-bg">
+
+    <!-- Sat -->
+    <div id="clock" class="clock clock-top-left clock-style-minimal">--:--</div>
+
+    <!-- Gumb za postavke -->
+    <button id="settings-btn" class="settings-btn">⚙️</button>
+
+    <!-- Glavni Timer Kontejner -->
+    <div class="glass-card main-container">
+        
+        <!-- Animacija -->
+        <div class="animation-wrapper">
+            <div id="animation-stage" class="anim-rocket">
+                <div class="anim-element" id="anim-icon">🚀</div>
+                <div class="anim-track" id="anim-track"></div>
+            </div>
+        </div>
+
+        <!-- Timer -->
+        <div class="timer-display" id="time-display">25:00</div>
+        <div class="mode-text" id="mode-text">Vrijeme je za fokus</div>
+
+        <!-- Kontrole -->
+        <div class="controls">
+            <button id="start-btn">Pokreni</button>
+            <button id="pause-btn">Pauziraj</button>
+            <button id="reset-btn">Resetiraj</button>
+        </div>
+
+        <!-- Dnevni Cilj (Daily Goal) -->
+        <div class="goal-wrapper">
+            <div class="goal-text">Dnevni cilj: <span id="goal-count">0</span>/<span id="goal-total">4</span></div>
+            <div class="progress-bar-container style-solid" id="progress-container">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal za Postavke -->
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content glass-card">
+            <h2>Postavke</h2>
+            <div class="settings-grid">
+                
+                <!-- Timer Postavke -->
+                <div class="setting-group">
+                    <label>Fokus (min):</label>
+                    <input type="number" id="set-focus" value="25" min="1" max="120">
+                </div>
+                <div class="setting-group">
+                    <label>Pauza (min):</label>
+                    <input type="number" id="set-break" value="5" min="1" max="60">
+                </div>
+                
+                <!-- Izgled -->
+                <div class="setting-group">
+                    <label>Pozadina:</label>
+                    <select id="set-bg">
+                        <option value="bg-gradient">Gradient Calm</option>
+                        <option value="bg-nature">Priroda (Šuma)</option>
+                        <option value="bg-lofi">Lo-Fi Study</option>
+                        <option value="bg-sunset">Zalazak sunca</option>
+                        <option value="bg-minimal">Minimal Tamna</option>
+                    </select>
+                </div>
+                
+                <!-- Animacija i Goal -->
+                <div class="setting-group">
+                    <label>Animacija Progresa:</label>
+                    <select id="set-anim">
+                        <option value="anim-rocket">🚀 Raketa do Mjeseca</option>
+                        <option value="anim-plant">🌱 Rast biljke</option>
+                        <option value="anim-sun">☀️ Putovanje sunca</option>
+                        <option value="anim-battery">🔋 Punjenje baterije</option>
+                        <option value="anim-mountain">⛰️ Planinar</option>
+                    </select>
+                </div>
+                <div class="setting-group">
+                    <label>Cilj Pomodora:</label>
+                    <input type="number" id="set-goal" value="4" min="1" max="20">
+                </div>
+                <div class="setting-group">
+                    <label>Stil Progres Bara:</label>
+                    <select id="set-prog-style">
+                        <option value="style-solid">Solid</option>
+                        <option value="style-gradient">Gradient</option>
+                        <option value="style-dashed">Dashed</option>
+                        <option value="style-dots">Dots</option>
+                        <option value="style-minimal">Minimal line</option>
+                    </select>
+                </div>
+
+                <!-- Zvuk -->
+                <div class="setting-group">
+                    <label>Zvuk Otkucaja:</label>
+                    <select id="set-sound">
+                        <option value="none">Bez zvuka (Mute)</option>
+                        <option value="tick">Sat (Tick)</option>
+                        <option value="pop">Kapljica (Pop)</option>
+                        <option value="wood">Drvo (Woodblock)</option>
+                        <option value="beep">Digitalno (Beep)</option>
+                    </select>
+                </div>
+
+                <!-- Sat -->
+                <div class="setting-group">
+                    <label>Vremenska Zona:</label>
+                    <select id="set-tz">
+                        <option value="local">Lokalno</option>
+                        <option value="UTC">UTC</option>
+                        <option value="America/New_York">New York (EST)</option>
+                        <option value="Asia/Tokyo">Tokyo (JST)</option>
+                        <option value="Europe/London">London (GMT)</option>
+                    </select>
+                </div>
+                <div class="setting-group">
+                    <label>Format Sata:</label>
+                    <select id="set-format">
+                        <option value="24">24-sata</option>
+                        <option value="12">12-sata (AM/PM)</option>
+                    </select>
+                </div>
+                <div class="setting-group">
+                    <label>Pozicija Sata:</label>
+                    <select id="set-clock-pos">
+                        <option value="clock-top-left">Gore Lijevo</option>
+                        <option value="clock-top-right">Gore Desno</option>
+                        <option value="clock-bottom-left">Dolje Lijevo</option>
+                        <option value="clock-bottom-right">Dolje Desno</option>
+                        <option value="clock-top-center">Gore Centar</option>
+                    </select>
+                </div>
+                <div class="setting-group">
+                    <label>Stil Sata:</label>
+                    <select id="set-clock-style">
+                        <option value="clock-style-minimal">Minimal (Tekst)</option>
+                        <option value="clock-style-card">Staklena Kartica</option>
+                        <option value="clock-style-pill">Zaobljena Pilula</option>
+                        <option value="clock-style-bold">Podebljano (Bold)</option>
+                        <option value="clock-style-digital">Digitalno Zeleno</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button id="save-btn" class="save-btn">Spremi & Zatvori</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
