@@ -32,14 +32,14 @@
 
         <!-- Kontrole -->
         <div class="controls">
-            <button id="start-btn">Pokreni</button>
-            <button id="pause-btn">Pauziraj</button>
-            <button id="reset-btn">Resetiraj</button>
+            <button id="start-btn">Start</button>
+            <button id="pause-btn">Pause</button>
+            <button id="reset-btn">Reset</button>
         </div>
 
         <!-- Dnevni Cilj (Daily Goal) -->
         <div class="goal-wrapper">
-            <div class="goal-text">Dnevni cilj: <span id="goal-count">0</span>/<span id="goal-total">4</span></div>
+            <div class="goal-text">Daily Goal: <span id="goal-count">0</span>/<span id="goal-total">4</span></div>
             <div class="progress-bar-container style-solid" id="progress-container">
                 <div class="progress-fill" id="progress-fill"></div>
             </div>
@@ -50,22 +50,22 @@
     <!-- Modal za Postavke -->
     <div id="settings-modal" class="modal hidden">
         <div class="modal-content glass-card">
-            <h2>Postavke</h2>
+            <h2>Settings</h2>
             <div class="settings-grid">
                 
                 <!-- Timer Postavke -->
                 <div class="setting-group">
-                    <label>Fokus (min):</label>
+                    <label>Focus (min):</label>
                     <input type="number" id="set-focus" value="25" min="1" max="120">
                 </div>
                 <div class="setting-group">
-                    <label>Pauza (min):</label>
+                    <label>Break (min):</label>
                     <input type="number" id="set-break" value="5" min="1" max="60">
                 </div>
                 
                 <!-- Izgled -->
                 <div class="setting-group">
-                    <label>Pozadina:</label>
+                    <label>Background:</label>
                     <select id="set-bg">
                         <option value="bg-gradient">Gradient Calm</option>
                         <option value="bg-nature">Priroda (Šuma)</option>
@@ -87,11 +87,11 @@
                     </select>
                 </div>
                 <div class="setting-group">
-                    <label>Cilj Pomodora:</label>
+                    <label>Pomodoro Goal:</label>
                     <input type="number" id="set-goal" value="4" min="1" max="20">
                 </div>
                 <div class="setting-group">
-                    <label>Stil Progres Bara:</label>
+                    <label>Progress Bar Style:</label>
                     <select id="set-prog-style">
                         <option value="style-solid">Solid</option>
                         <option value="style-gradient">Gradient</option>
